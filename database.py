@@ -3,10 +3,7 @@ from datetime import date
 from avisos import *
 
 class Data_base(Avisos):
-    DB_NAME = "contabilidade.sqlite"
-    def __init__(self):
-        self.start()
-
+    DB_NAME = "contabilidade.sqlite3"
     def start(self):
         # Conecta ao SQLite ou cria um arquivo 
         conn = connect(self.DB_NAME) 
@@ -46,6 +43,41 @@ class Data_base(Avisos):
         conn.commit()
         cursor.close()
         conn.close()
+
+    def criar_conta(self, codigo, nome, tipo, saldo):
+        self.execute_post("""
+            INSERT OR IGNORE INTO contas_contabeis (codigo, nome, tipo, saldo) VALUES (?, ?, ?, ?);
+            """, (codigo, nome, tipo, saldo))
+
+    def transacao (self, data, conta_debito, conta_crédito, valor, descricao):
+        self.execute_post("""
+            INSERT OR IGNORE INTO contas_contabeis (codigo, nome, tipo, saldo) VALUES (?, ?, ?, ?);
+            """, (data, conta_debito, conta_crédito, valor, descricao))
+    def execute_post(self, prompt, param):
+        # Conecta ao SQLite ou cria um arquivo 
+        conn = connect(self.DB_NAME) 
+        cursor = conn.cursor()
+        
+        cursor.execute(prompt, param)
+
+        # Confirma e fecha conecção
+        conn.commit()
+        cursor.close()
+        conn.close()
+    
+    def execute_get(self, prompt, param):
+        # Conecta ao SQLite ou cria um arquivo 
+        conn = connect(self.DB_NAME) 
+        cursor = conn.cursor()
+        
+        res = cursor.execute(prompt, param)
+
+        # Confirma e fecha conecção
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        return res
 
         
 Data_base()

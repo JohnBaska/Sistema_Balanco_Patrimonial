@@ -4,7 +4,7 @@ from avisos import *
 
 class Data_base(Avisos):
     DB_NAME = "contabilidade.sqlite3"
-    def start(self):
+    def start_banco(self):
         # Conecta ao SQLite ou cria um arquivo 
         conn = connect(self.DB_NAME) 
         cursor = conn.cursor()
@@ -44,15 +44,16 @@ class Data_base(Avisos):
         cursor.close()
         conn.close()
 
-    def criar_conta(self, codigo, nome, tipo, saldo):
+    def criar_conta(self, dados):
         self.execute_post("""
             INSERT OR IGNORE INTO contas_contabeis (codigo, nome, tipo, saldo) VALUES (?, ?, ?, ?);
-            """, (codigo, nome, tipo, saldo))
+            """, dados)
 
-    def transacao (self, data, conta_debito, conta_crédito, valor, descricao):
+    def registrar_transacao (self, dados):
         self.execute_post("""
-            INSERT OR IGNORE INTO contas_contabeis (codigo, nome, tipo, saldo) VALUES (?, ?, ?, ?);
-            """, (data, conta_debito, conta_crédito, valor, descricao))
+            INSERT OR IGNORE INTO transacoes (data, conta_debito, conta_credito, valor, descricao) VALUES (?, ?, ?, ?, ?);
+            """, dados)
+    
     def execute_post(self, prompt, param):
         # Conecta ao SQLite ou cria um arquivo 
         conn = connect(self.DB_NAME) 
@@ -65,12 +66,17 @@ class Data_base(Avisos):
         cursor.close()
         conn.close()
     
-    def execute_get(self, prompt, param):
+    def execute_get(self, prompt, param=None):
         # Conecta ao SQLite ou cria um arquivo 
         conn = connect(self.DB_NAME) 
         cursor = conn.cursor()
         
-        res = cursor.execute(prompt, param)
+        if param == None:
+            cursor.execute(prompt)
+        else:
+            cursor.execute(prompt, param)
+
+        res = cursor.fetchall()
 
         # Confirma e fecha conecção
         conn.commit()

@@ -40,13 +40,13 @@ class Teste(Balanco_Patrimonial):
         
     def start_contas(self):
         dados = [
-            ('1.1.1.01', 'Caixa', 'Ativo', 5000.00),
-            ('1.1.1.02', 'Banco Conta Movimento', 'Ativo', 20000.00),
-            ('1.2.1.01', 'Estoque', 'Ativo', 15000.00),
-            ('2.1.1.01', 'Fornecedores a Pagar', 'Passivo', 8000.00),
-            ('2.1.2.01', 'Empréstimos Bancários', 'Passivo', 10000.00),
-            ('3.1.1.01', 'Capital Social', 'Patrimônio Líquido', 50000.00),
-            ('3.2.1.01', 'Reservas de Lucros', 'Patrimônio Líquido', 5000.00)
+            ('Caixa', 'Ativo', 5000.00),
+            ('Banco Conta Movimento', 'Ativo', 20000.00),
+            ('Estoque', 'Ativo', 15000.00),
+            ('Fornecedores a Pagar', 'Passivo', 8000.00),
+            ('Empréstimos Bancários', 'Passivo', 10000.00),
+            ('Capital Social', 'Patrimônio Líquido', 50000.00),
+            ('Reservas de Lucros', 'Patrimônio Líquido', 5000.00)
         ]
 
         for i in dados:

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block window_style %}height: 800px; width: 800px;{% endblock %}
+
+{% block window_title %}Contas{% endblock %}
+
+{% block window_body %}
+    {% if contas %}
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Codigo</th>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Saldo</th>
+            </thead>
+            <tbody>
+                {% for conta in contas %}
+                    {% if conta %}
+                    <tr>
+                        <td>{{ conta[0] }}</td>
+                        <td>{{ conta[1] }}</td>
+                        <td>{{ conta[2] }}</td>
+                        <td>{{ conta[3] }}</td>
+                        <td>{{ conta[4] }}</td>
+                    </tr>
+                    {% endif %} 
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}    
+{% endblock %}
+
+{% block elementos_adicionais %}
+    <button class="add"><a href="/create_conta">+</a></button>
+{% endblock %}
+

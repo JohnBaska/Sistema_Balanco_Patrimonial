@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block window_style %}height: 600px; width: 500px;{% endblock %}
+
+{% block window_title %}Registro de Lançamento{% endblock %}
+
+{% block window_body %}
+    <form action="execute_create_lancamento" method="POST" class="form">
+        <div class="form-group">
+            <label for="date">Data: </label>
+            <input id="date" name="date" type="date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="debito">Débito: </label>
+            <select name="debito" id="debito">
+                <option value="">Selecione a Conta de Débito</option>
+                {% for conta in contas %}
+                    <option value="{{ conta[1] }}">{{ conta[1] }} - {{ conta[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="credito">Crédito: </label>
+            <select name="credito" id="credito">
+                <option value="">Selecione a Conta de Crédito</option>
+                {% for conta in contas %}
+                    <option value="{{ conta[1] }}">{{ conta[1] }} - {{ conta[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="valor">Valor: </label>
+            <input id="valor" name="valor" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição: </label>
+            <input id="descrcao" name="descricao" type="text" required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Criar</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block elementos_adicionais %}
+    <button class="back"><a href="/lancamentos">Voltar</a></button>
+{% endblock %}

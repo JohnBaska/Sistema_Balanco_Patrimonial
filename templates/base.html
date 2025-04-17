@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <ul>
+                <li class="nav-item"><a href="/" class="nav-btn">Home</a></li>
+                <li class="nav-item"><a href="/contas" class="nav-btn">Contas</a></li>
+                <li class="nav-item"><a href="/lancamentos" class="nav-btn">Lançamentos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="window" style="{% block window_style %} height: 250px {% endblock %}">
+            <div class="window-header">
+                {% block window_title %} Minha Janela {% endblock %}
+            </div>
+            <div class="window-body">
+                {% block window_body %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    {% block elementos_adicionais %}{% endblock %}
+</body>
+</html>

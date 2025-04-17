@@ -1,6 +1,6 @@
 from database import *
 
-class Balanco_Patrimonial(Data_base):
+class Balanco_Patrimonial(Database):
     def atualizar_contas(self, codigo, operation_type, valor):
         saldo_atual = self.execute_get(f"SELECT saldo FROM contas_contabeis WHERE codigo = ?", (str(codigo),))
 

@@ -2,8 +2,8 @@ from sqlite3 import *
 from datetime import date
 from avisos import *
 
-class Data_base(Avisos):
-    DB_NAME = "contabilidade.sqlite3"
+class Database(Avisos):
+    DB_NAME = "contabilidade.sql"
     def start_banco(self):
         # Conecta ao SQLite ou cria um arquivo 
         conn = connect(self.DB_NAME) 
@@ -14,7 +14,7 @@ class Data_base(Avisos):
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS contas_contabeis (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    codigo TEXT UNIQUE NOT NULL,
+                    codigo TEXT NOT NULL UNIQUE,
                     nome TEXT NOT NULL,
                     tipo TEXT CHECK (tipo IN ('Ativo', 'Passivo', 'Patrimoio Liquido')) NOT NULL,
                     saldo REAL DEFAULT 0
@@ -86,4 +86,4 @@ class Data_base(Avisos):
         return res
 
         
-Data_base()
+Database()

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block window_style %}height: 500px; width: 500px;{% endblock %}
+
+{% block window_title %}Criador de Conta{% endblock %}
+
+{% block window_body %}
+    <form action="execute_create_conta" method="POST" class="form">
+        <div class="form-group">
+            <label for="name">Nome: </label>
+            <input id="name" name="name" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="code">Código: </label>
+            <input id="code" name="code" type="text" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="type">Tipo: </label>
+            <select name="type" id="type">
+                <option value="Ativo">Ativo</option>
+                <option value="Passivo">Passivo</option>
+                <option value="Patrimonio_Liquido">Patrimônio Líquido</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="balance">Saldo: </label>
+            <input id="balance" name="balance" type="text" required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Criar</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block elementos_adicionais %}
+    <button class="back"><a href="/contas">Voltar</a></button>
+{% endblock %}

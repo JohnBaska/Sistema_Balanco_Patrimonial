@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block window_style %}height: 800px; width: 800px;{% endblock %}
+
+{% block window_title %}Lançamentos{% endblock %}
+
+{% block window_body %}
+    {% if lancamentos %}
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Débito</th>
+                <th>Credito</th>
+                <th>Valor</th>
+                <th>Descrição</th>
+            </thead>
+            <tbody>
+                {% for lancamento in lancamentos %}
+                    {% if lancamento %}
+                    <tr>
+                        <td>{{ lancamento[0] }}</td>
+                        <td>{{ lancamento[1] }}</td>
+                        <td>{{ lancamento[2] }}</td>
+                        <td>{{ lancamento[3] }}</td>
+                        <td>{{ lancamento[4] }}</td>
+                        <td>{{ lancamento[5] }}</td>
+                    </tr>
+                    {% endif %} 
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}    
+{% endblock %}
+
+{% block elementos_adicionais %}
+    <button class="add"><a href="/create_lancamento">+</a></button>
+{% endblock %}
